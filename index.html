@@ -1,181 +1,106 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#050815" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>ASCEND V-Taper</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050815">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>ASCEND V4</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+<div class="mesh"></div><div class="glow a"></div><div class="glow b"></div>
 
-  <main class="app">
-    <header class="header">
-      <div>
-        <p class="kicker">ASCEND · V3 UPDATE</p>
-        <h1 id="greeting">민준, 오늘도 올라가자</h1>
-      </div>
-      <button class="profile-chip" id="installHint">APP</button>
-    </header>
-
-    <section id="home" class="view active">
-      <article class="hero glass">
-        <div class="hero-text">
-          <p class="kicker">TODAY'S MISSION</p>
-          <h2 id="todayKo">가슴 + 삼두</h2>
-          <p id="todayCardio">천국의 계단 20분</p>
-          <div class="hero-actions">
-            <button class="primary" data-route="workout">운동 시작</button>
-            <button class="secondary" data-route="log">기록하기</button>
-          </div>
-        </div>
-        <div class="dial">
-          <svg viewBox="0 0 140 140">
-            <circle class="dial-bg" cx="70" cy="70" r="58"/>
-            <circle class="dial-fg" id="dialFg" cx="70" cy="70" r="58"/>
-          </svg>
-          <div><b id="pctText">0%</b><span>complete</span></div>
-        </div>
-      </article>
-
-      <section class="goal-card glass">
-        <div class="goal-top">
-          <div>
-            <p class="kicker">CUTTING GOAL</p>
-            <h3>81kg → 73kg</h3>
-          </div>
-          <b id="goalPercent">0%</b>
-        </div>
-        <div class="goal-line"><i id="goalLine"></i></div>
-        <p id="goalText" class="muted">오늘 아침 체중을 입력해줘.</p>
-      </section>
-
-      <section class="metrics">
-        <article class="metric glass">
-          <span>Weight</span>
-          <div><input id="weight" type="number" step="0.1" placeholder="80.9"><b>kg</b></div>
-          <small id="weightMsg">목표까지 계산</small>
-        </article>
-        <article class="metric glass">
-          <span>Protein</span>
-          <div><input id="protein" type="number" step="5" placeholder="0"><b>/150g</b></div>
-          <div class="bar"><i id="proteinBar"></i></div>
-        </article>
-        <article class="metric glass">
-          <span>Water</span>
-          <div><input id="water" type="number" step="100" placeholder="0"><b>/3000mL</b></div>
-          <div class="bar"><i id="waterBar"></i></div>
-        </article>
-        <article class="metric glass">
-          <span>Sleep</span>
-          <div><input id="sleep" type="number" step="0.5" placeholder="0"><b>h</b></div>
-          <small id="sleepMsg">7.5h 이상 목표</small>
-        </article>
-      </section>
-
-      <article class="glass checklist">
-        <div class="section-title">
-          <h3>Daily System</h3>
-          <button class="linkbtn" id="saveMorning">아침 기록 저장</button>
-        </div>
-        <label><input id="cCreatine" type="checkbox"> <span>크레아틴 3~5g</span></label>
-        <label><input id="cProtein" type="checkbox"> <span>프로틴 1스쿱</span></label>
-        <label><input id="cSkin" type="checkbox"> <span>운동 후 샤워/세안</span></label>
-        <label><input id="cSteps" type="checkbox"> <span>8,000보 이상</span></label>
-      </article>
-
-      <article class="glass chart-card">
-        <div class="section-title">
-          <h3>Weight Trend</h3>
-          <button class="linkbtn" id="clearWeights">초기화</button>
-        </div>
-        <div id="chart" class="chart"></div>
-      </article>
-    </section>
-
-    <section id="workout" class="view">
-      <div class="sticky-title">
-        <div>
-          <p class="kicker">WEEKLY SPLIT</p>
-          <h2>Workout</h2>
-        </div>
-        <select id="daySelect"></select>
-      </div>
-      <div id="workoutList" class="cards"></div>
-      <article class="finish-card glass">
-        <h3 id="finishTitle">MISSION IN PROGRESS</h3>
-        <p id="finishSub">완료 체크를 채우면 오늘 운동이 완료돼.</p>
-      </article>
-    </section>
-
-    <section id="log" class="view">
-      <div class="sticky-title">
-        <div>
-          <p class="kicker">PROGRESSIVE OVERLOAD</p>
-          <h2>Training Log</h2>
-        </div>
-      </div>
-      <div class="tip glass">
-        <b>증량 규칙</b>
-        <p>3세트 모두 12회 이상이면 다음 운동 +2.5kg. 8회 미만이 나오면 무게를 낮춰.</p>
-      </div>
-      <div id="logList"></div>
-    </section>
-
-    <section id="guide" class="view">
-      <div class="sticky-title">
-        <div>
-          <p class="kicker">FORM GUIDE</p>
-          <h2>자세 가이드</h2>
-        </div>
-      </div>
-      <article class="glass guide-card">
-        <h3>넓은 어깨 우선순위</h3>
-        <p>레터럴 레이즈는 무게보다 측면 삼각근 자극이 우선. 승모근이 먼저 뭉치면 무게를 낮추거나 가동범위를 줄여.</p>
-      </article>
-      <article class="glass guide-card">
-        <h3>하체가 안 털리는 이유</h3>
-        <p>근육통이 없어도 운동은 된 거야. 다만 하강 2~3초, 마지막 1~2개 힘든 강도, 충분한 깊이를 확인해.</p>
-      </article>
-      <article class="glass guide-card">
-        <h3>여드름 고려 프로틴</h3>
-        <p>우선 WPI 또는 식물성 단백질로 시작. WPC, 매스게이너, 당 많은 제품은 피하는 쪽이 안전해.</p>
-      </article>
-    </section>
-
-    <section id="profile" class="view">
-      <article class="glass profile">
-        <div class="avatar">MJ</div>
-        <h2>민준 V-Taper Project</h2>
-        <p>목표: 체지방 23% → 12~13%, 넓은 어깨, 큰 볼륨, 근선명도.</p>
-      </article>
-      <section class="score-grid">
-        <article class="score glass"><span>Shoulder</span><b>84</b><i style="width:84%"></i></article>
-        <article class="score glass"><span>Back</span><b>76</b><i style="width:76%"></i></article>
-        <article class="score glass"><span>Arms</span><b>69</b><i style="width:69%"></i></article>
-        <article class="score glass"><span>Leanness</span><b>45</b><i style="width:45%"></i></article>
-      </section>
-    </section>
-
-    <div id="timer" class="timer">
-      <span id="timerText">00:00</span>
-      <button id="stopTimer">정지</button>
+<main class="app">
+  <header class="head">
+    <div>
+      <p class="tag">ASCEND · V4</p>
+      <h1 id="hello">민준, 오늘도 올라가자</h1>
     </div>
+    <button class="pill" id="exportBtn">백업</button>
+  </header>
 
-    <nav class="tabs">
-      <button class="tab active" data-tab="home"><span>⌂</span>Home</button>
-      <button class="tab" data-tab="workout"><span>◆</span>Workout</button>
-      <button class="tab" data-tab="log"><span>↗</span>Log</button>
-      <button class="tab" data-tab="guide"><span>?</span>Guide</button>
-      <button class="tab" data-tab="profile"><span>◉</span>Me</button>
-    </nav>
-  </main>
+  <section id="home" class="page on">
+    <article class="hero card">
+      <div>
+        <p class="tag">TODAY SCORE</p>
+        <h2><span id="score">0</span>점</h2>
+        <p id="scoreMsg">오늘 기록을 입력하면 점수가 계산돼.</p>
+        <div class="actions">
+          <button class="mainbtn" data-tabto="workout">운동 시작</button>
+          <button class="subbtn" data-tabto="log">기록</button>
+        </div>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 150 150"><circle class="rbg" cx="75" cy="75" r="62"/><circle class="rfg" id="ring" cx="75" cy="75" r="62"/></svg>
+        <b id="completePct">0%</b>
+      </div>
+    </article>
 
-  <script src="app.js"></script>
+    <section class="quick">
+      <article class="mini card"><span>Streak</span><b id="streak">0🔥</b><small>연속 기록</small></article>
+      <article class="mini card"><span>Level</span><b id="level">1</b><small id="xpText">0/100 XP</small></article>
+    </section>
+
+    <article class="goal card">
+      <div class="row"><div><p class="tag">CUTTING GOAL</p><h3>81kg → 73kg</h3></div><strong id="goalPct">0%</strong></div>
+      <div class="line"><i id="goalLine"></i></div>
+      <p id="goalMsg">아침 공복 체중을 입력해줘.</p>
+    </article>
+
+    <section class="metrics">
+      <label class="metric card"><span>Weight</span><div><input id="weight" type="number" step=".1" placeholder="80.9"><b>kg</b></div></label>
+      <label class="metric card"><span>Protein</span><div><input id="protein" type="number" step="5" placeholder="0"><b>/150g</b></div><em><i id="proteinBar"></i></em></label>
+      <label class="metric card"><span>Water</span><div><input id="water" type="number" step="100" placeholder="0"><b>/3000mL</b></div><em><i id="waterBar"></i></em></label>
+      <label class="metric card"><span>Sleep</span><div><input id="sleep" type="number" step=".5" placeholder="0"><b>h</b></div></label>
+    </section>
+
+    <article class="card checklist">
+      <div class="row"><h3>Daily System</h3><button class="tinybtn" id="saveDay">오늘 저장</button></div>
+      <label><input id="cWorkout" type="checkbox"> 운동 완료</label>
+      <label><input id="cCreatine" type="checkbox"> 크레아틴 3~5g</label>
+      <label><input id="cProtein" type="checkbox"> 프로틴 1스쿱</label>
+      <label><input id="cSkin" type="checkbox"> 운동 후 세안/샤워</label>
+      <label><input id="cSteps" type="checkbox"> 8,000보 이상</label>
+    </article>
+  </section>
+
+  <section id="workout" class="page">
+    <div class="sticky row"><div><p class="tag">SPLIT</p><h2>Workout</h2></div><select id="day"></select></div>
+    <div id="workoutList" class="list"></div>
+  </section>
+
+  <section id="log" class="page">
+    <div class="sticky"><p class="tag">OVERLOAD</p><h2>Training Log</h2></div>
+    <article class="card info"><b>자동 증량</b><p>3세트 모두 12회 이상이면 다음 운동 +2.5kg 추천. 8회 미만이면 감량 추천.</p></article>
+    <div id="logList"></div>
+  </section>
+
+  <section id="progress" class="page">
+    <div class="sticky"><p class="tag">PROGRESS</p><h2>Progress</h2></div>
+    <article class="card"><div class="row"><h3>Weight Trend</h3><button class="tinybtn" id="clearWeight">초기화</button></div><div id="chart" class="chart"></div></article>
+    <article class="card"><h3>Calendar</h3><div id="calendar" class="calendar"></div></article>
+    <article class="card"><h3>Physique Focus</h3><div class="focus"><span>Shoulder</span><i style="width:86%"></i><span>Back</span><i style="width:78%"></i><span>Arms</span><i style="width:70%"></i><span>Leanness</span><i style="width:46%"></i></div></article>
+  </section>
+
+  <section id="guide" class="page">
+    <div class="sticky"><p class="tag">GUIDE</p><h2>Coach Notes</h2></div>
+    <article class="card note"><h3>어깨 넓이</h3><p>레터럴은 무게보다 자극. 승모가 먼저 뭉치면 팔을 낮게 들고 천천히 내려.</p></article>
+    <article class="card note"><h3>하체</h3><p>근육통보다 깊이, 하강 속도, RIR 1~2가 중요. 레그프레스는 무릎 잠그지 않기.</p></article>
+    <article class="card note"><h3>피부 고려 보충제</h3><p>WPI나 식물성 단백질 우선. WPC, 매스게이너, 당 많은 제품은 피하기.</p></article>
+  </section>
+
+  <div class="timer" id="timer"><b id="timerText">00:00</b><button id="stop">정지</button></div>
+
+  <nav class="tabs">
+    <button class="tab on" data-tab="home">⌂<span>Home</span></button>
+    <button class="tab" data-tab="workout">◆<span>Workout</span></button>
+    <button class="tab" data-tab="log">↗<span>Log</span></button>
+    <button class="tab" data-tab="progress">▥<span>Progress</span></button>
+    <button class="tab" data-tab="guide">?<span>Guide</span></button>
+  </nav>
+</main>
+<script src="app.js"></script>
 </body>
 </html>

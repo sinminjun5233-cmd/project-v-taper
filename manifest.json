@@ -1,7 +1,7 @@
 {
-  "name": "ASCEND V-Taper",
+  "name": "ASCEND V4",
   "short_name": "ASCEND",
-  "description": "민준 전용 프리미엄 운동 루틴 앱",
+  "description": "민준 전용 운동·체중·습관 관리 앱",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
