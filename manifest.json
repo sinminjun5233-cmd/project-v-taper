@@ -1,13 +1,13 @@
 {
-  "name": "ASCEND V4",
+  "name": "ASCEND",
   "short_name": "ASCEND",
-  "description": "민준 전용 운동·체중·습관 관리 앱",
+  "description": "Project NOCTIS - 운동, 체중, 영양, 저널 관리 앱",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#050815",
-  "theme_color": "#050815",
+  "background_color": "#09050b",
+  "theme_color": "#09050b",
   "icons": [
     {
       "src": "icon-192.png",
