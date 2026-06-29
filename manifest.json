@@ -1,7 +1,7 @@
 {
-  "name": "ASCEND",
+  "name": "ASCEND V6",
   "short_name": "ASCEND",
-  "description": "Project NOCTIS V5.3 - 저장 미리보기와 홈 메모 반영",
+  "description": "Project NOCTIS V6 - ARIA, Body Journal, Nutrition, Progress",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

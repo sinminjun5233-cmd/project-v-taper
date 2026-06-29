@@ -17,6 +17,44 @@ function renderMemos(){
   if(hn) hn.textContent=note ? shortText(note) : "저장된 저널 없음";
 }
 
+function ariaReportText(){
+  const prot=+$("#protein").value||0, wat=+$("#water").value||0, sleep=+$("#sleep").value||0;
+  const total=routine[day].items.length;
+  const done=Object.values(get(key(),{})).filter(Boolean).length;
+  const cp=total?Math.round(done/total*100):0;
+  const w=+$("#weight").value||0;
+  let lines=[];
+  lines.push(`운동 완료율: ${cp}%`);
+  if(cp===100) lines.push("✓ 오늘 운동 수행은 완료 상태야. 기록 저장까지 하면 다음 증량 판단이 더 정확해져.");
+  else lines.push("• 아직 운동 체크가 남아 있어. 완료한 운동은 바로 체크해줘.");
+  if(prot>=130) lines.push("✓ 단백질은 근육 유지에 충분한 편이야.");
+  else lines.push(`• 단백질이 부족해. 목표까지 약 ${Math.max(0,130-prot)}g 정도 더 채우면 좋아.`);
+  if(wat>=2500) lines.push("✓ 수분 섭취가 좋아. 펌핑과 회복에 도움돼.");
+  else lines.push("• 물은 2.5L 이상을 먼저 목표로 잡자.");
+  if(sleep && sleep<6) lines.push("⚠ 수면이 부족해. 오늘/내일은 실패지점까지 밀지 말고 RIR 2 정도로.");
+  else if(sleep>=7) lines.push("✓ 수면이 괜찮아. 고중량 운동을 진행하기 좋은 편.");
+  if(w) lines.push(`체중 목표까지 ${(w-73).toFixed(1)}kg 남았어. 급하게 빼기보다 주당 0.5~0.8kg 감량을 노리자.`);
+  return lines.join("\\n");
+}
+function renderAria(){
+  const report=ariaReportText();
+  const r=$("#ariaReport");
+  if(r) r.textContent=report;
+}
+function renderPhotos(){
+  const box=$("#photoTimeline");
+  if(!box) return;
+  const photos=get("asc6.photos",[]);
+  if(!photos.length){ box.innerHTML='<p class="soft">저장된 사진이 없어. Progress Photo에서 사진을 추가해줘.</p>'; return; }
+  box.innerHTML="";
+  photos.slice().reverse().forEach(p=>{
+    const card=document.createElement("article");
+    card.className="photo-card";
+    card.innerHTML=`<img src="${p.data}" alt="progress photo"><div><b>${p.date}</b><p>${p.memo||"메모 없음"}</p></div>`;
+    box.appendChild(card);
+  });
+}
+
 function init(){
   const h=new Date().getHours();
   $("#hello").textContent=h<12?"민준, 아침 미션 시작":h<18?"민준, 루틴 가자":"민준, 오늘도 올라가자";
@@ -84,12 +122,46 @@ function init(){
     navigator.vibrate?.(80);
   });
 
+  const refresh=$("#refreshAria");
+  if(refresh) refresh.addEventListener("click",()=>{renderAria();navigator.vibrate?.(70);});
+
+  const savePhoto=$("#savePhoto");
+  if(savePhoto) savePhoto.addEventListener("click",()=>{
+    const input=$("#photoInput");
+    const file=input?.files?.[0];
+    const memo=$("#photoMemo")?.value || "";
+    if(!file){
+      $("#photoSaved").textContent="사진을 먼저 선택해줘.";
+      return;
+    }
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const photos=get("asc6.photos",[]);
+      photos.push({date:today(),memo,data:reader.result});
+      set("asc6.photos",photos.slice(-12));
+      $("#photoSaved").textContent="저장됨 · "+new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
+      $("#photoMemo").value="";
+      input.value="";
+      renderPhotos();
+      navigator.vibrate?.(90);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  const clearPhotos=$("#clearPhotos");
+  if(clearPhotos) clearPhotos.addEventListener("click",()=>{
+    set("asc6.photos",[]);
+    renderPhotos();
+  });
+
   renderMemos();
+  renderPhotos();
+  renderAria();
   render();
 }
 function route(t){$$(".tab").forEach(x=>x.classList.toggle("on",x.dataset.tab===t));$$(".page").forEach(x=>x.classList.toggle("on",x.id===t))}
 function saveProfile(){set("asc5.profile",{weight:$("#weight").value,protein:$("#protein").value,water:$("#water").value,sleep:$("#sleep").value,cWorkout:$("#cWorkout").checked,cCreatine:$("#cCreatine").checked,cProtein:$("#cProtein").checked,cSkin:$("#cSkin").checked,cSteps:$("#cSteps").checked});update()}
-function render(){renderWorkout();renderLog();update();draw();calendar()}
+function render(){renderWorkout();renderLog();update();draw();calendar();renderAria()}
 function renderWorkout(){const s=get(key(),{}),wrap=$("#workoutList");wrap.innerHTML="";routine[day].items.forEach((it,i)=>{const id="ex"+i,card=document.createElement("article");card.className="exercise"+(s[id]?" done":"");card.innerHTML=`<div class="exmain"><div class="icon">${it[5]}</div><div class="extitle"><h3>${it[0]}</h3><div class="chips"><span class="chip">${it[1]}세트</span><span class="chip">${it[2]}</span><span class="chip">${it[3]}</span></div></div><input type="checkbox" ${s[id]?"checked":""}></div><details><summary>자세</summary><p>${it[4]}</p></details><div class="timerrow">${it[3]!=="-"?`<button data-sec="${parseInt(it[3])}">휴식 ${it[3]}</button>`:""}<button data-log="${it[0]}">기록</button></div>`;$("input",card).onchange=e=>{let n=get(key(),{});n[id]=e.target.checked;set(key(),n);renderWorkout();update()};const tb=$("[data-sec]",card);if(tb)tb.onclick=()=>start(+tb.dataset.sec);$("[data-log]",card).onclick=()=>{route("log");setTimeout(()=>document.querySelector(`[data-name="${CSS.escape(it[0])}"]`)?.scrollIntoView({behavior:"smooth",block:"center"}),60)};wrap.appendChild(card)})}
 function renderLog(){const wrap=$("#logList");wrap.innerHTML="";routine[day].items.forEach(it=>{if(it[3]==="-")return;const name=it[0],d=get("asc5.log."+name,{}),card=document.createElement("article");card.className="logcard card";card.dataset.name=name;card.innerHTML=`<h3>${name}</h3><p class="rec">${rec(d)}</p><div class="setgrid"><input class="kg" type="number" step=".5" placeholder="kg" value="${d.kg??""}"><input class="r1" type="number" placeholder="1" value="${d.r1??""}"><input class="r2" type="number" placeholder="2" value="${d.r2??""}"><input class="r3" type="number" placeholder="3" value="${d.r3??""}"></div><button class="save">저장</button>`;$(".save",card).onclick=()=>{let nd={kg:$(".kg",card).value,r1:$(".r1",card).value,r2:$(".r2",card).value,r3:$(".r3",card).value,date:today()};set("asc5.log."+name,nd);$(".rec",card).textContent=rec(nd);update();navigator.vibrate?.(80)};wrap.appendChild(card)})}
 function rec(d){const kg=+d.kg,reps=[+d.r1,+d.r2,+d.r3];if(!kg||reps.some(x=>!x))return"기록하면 다음 무게 추천.";if(reps.every(x=>x>=12))return`다음 운동 ${kg+2.5}kg 추천.`;if(reps.every(x=>x>=10))return"같은 무게로 12회까지.";if(reps.some(x=>x<8))return`${Math.max(kg-2.5,0)}kg로 낮춰도 됨.`;return"현재 무게 유지."}
