@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#09050b">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>ASCEND V6</title>
+<title>ASCEND V6.2</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +15,7 @@
 
 <main class="app">
 <header class="head">
-  <div><p class="tag">PROJECT NOCTIS · V6.1</p><h1 id="hello">민준, 오늘도 올라가자</h1></div>
+  <div><p class="tag">PROJECT NOCTIS · V6.2</p><h1 id="hello">민준, 오늘도 올라가자</h1></div>
   <button class="logo">▲</button>
 </header>
 
@@ -106,7 +106,7 @@
 
   <article class="card">
     <div class="row"><h3>Photo Timeline</h3><button class="tiny" id="clearPhotos" type="button">Clear</button></div>
-    <div id="photoTimeline" class="photo-grid"></div>
+    <p class="saved" id="photoCount">저장된 사진 0개</p><div id="photoTimeline" class="photo-grid"></div>
   </article>
 
   <article class="card meal">
@@ -122,7 +122,7 @@
   <article class="card aria-report">
     <h3>오늘의 분석</h3>
     <p id="ariaReport">기록을 입력하면 ARIA가 분석을 보여줘.</p>
-    <button class="primary wide" id="refreshAria" type="button">Refresh ARIA</button>
+    <button class="primary wide" id="refreshAria" type="button">Refresh ARIA</button><p class="saved" id="ariaSaved">새로고침 대기 중</p>
   </article>
   <article class="card info">
     <b>현재 AI 방식</b>
