@@ -1,7 +1,7 @@
 {
   "name": "ASCEND",
   "short_name": "ASCEND",
-  "description": "Project NOCTIS - 운동, 체중, 영양, 저널 관리 앱",
+  "description": "Project NOCTIS V5.2 - 버튼 작동 수정 버전",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
