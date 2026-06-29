@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#050815" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Project V-Taper</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+
+  <main class="phone">
+    <header class="app-header">
+      <div>
+        <p class="tiny">PROJECT V-TAPER · V2</p>
+        <h1 id="greeting">Good Evening, 민준</h1>
+      </div>
+      <button class="avatar" id="openSettings">MJ</button>
+    </header>
+
+    <section id="home" class="screen active">
+      <article class="hero-card">
+        <div class="hero-copy">
+          <p class="tiny">TODAY'S WORKOUT</p>
+          <h2 id="todayName">Chest + Triceps</h2>
+          <p id="todayCardio">천국의 계단 20분</p>
+          <button class="primary" data-go="workout">Start Workout</button>
+        </div>
+        <div class="progress-dial">
+          <svg viewBox="0 0 140 140">
+            <defs>
+              <linearGradient id="dialGrad" x1="0" x2="1">
+                <stop offset="0%" stop-color="#5be7ff" />
+                <stop offset="100%" stop-color="#3978ff" />
+              </linearGradient>
+            </defs>
+            <circle class="dial-bg" cx="70" cy="70" r="58" />
+            <circle class="dial-fg" id="dialFg" cx="70" cy="70" r="58" />
+          </svg>
+          <div><b id="homePct">0%</b><span>complete</span></div>
+        </div>
+      </article>
+
+      <section class="metric-grid">
+        <article class="metric glass">
+          <span>Weight</span>
+          <div><input id="weightToday" type="number" step="0.1" placeholder="80.9"><b>kg</b></div>
+          <small id="weightDelta">목표 73kg</small>
+        </article>
+        <article class="metric glass">
+          <span>Protein</span>
+          <div><input id="proteinToday" type="number" step="5" placeholder="0"><b>g</b></div>
+          <div class="mini-bar"><i id="proteinBar"></i></div>
+        </article>
+        <article class="metric glass">
+          <span>Water</span>
+          <div><input id="waterToday" type="number" step="100" placeholder="0"><b>mL</b></div>
+          <div class="mini-bar"><i id="waterBar"></i></div>
+        </article>
+        <article class="metric glass">
+          <span>Sleep</span>
+          <div><input id="sleepToday" type="number" step="0.5" placeholder="0"><b>h</b></div>
+          <small>목표 7.5h+</small>
+        </article>
+      </section>
+
+      <section class="stack">
+        <article class="glass checklist">
+          <div class="section-head">
+            <h3>Daily System</h3>
+            <button class="textbtn" id="resetDay">Reset</button>
+          </div>
+          <label><input class="habit" id="hCreatine" type="checkbox"><span>Creatine 3–5g</span></label>
+          <label><input class="habit" id="hProtein" type="checkbox"><span>Protein 1 scoop</span></label>
+          <label><input class="habit" id="hSteps" type="checkbox"><span>8,000 steps</span></label>
+          <label><input class="habit" id="hSkin" type="checkbox"><span>운동 후 세안 / 샤워</span></label>
+        </article>
+
+        <article class="glass weight-card">
+          <div class="section-head">
+            <h3>Weight Trend</h3>
+            <button class="textbtn" id="saveWeight">Save</button>
+          </div>
+          <div class="chart" id="weightChart"></div>
+        </article>
+      </section>
+    </section>
+
+    <section id="workout" class="screen">
+      <div class="section-head sticky-head">
+        <div>
+          <p class="tiny">WEEKLY SPLIT</p>
+          <h2>Workout</h2>
+        </div>
+        <select id="daySelect"></select>
+      </div>
+      <div id="workoutCards" class="workout-list"></div>
+      <article class="glass mission">
+        <h3 id="missionText">Mission not complete yet</h3>
+        <p>전부 체크하면 오늘 루틴 완료 처리돼.</p>
+      </article>
+    </section>
+
+    <section id="log" class="screen">
+      <div class="section-head">
+        <div>
+          <p class="tiny">PROGRESSIVE OVERLOAD</p>
+          <h2>Training Log</h2>
+        </div>
+      </div>
+      <div id="logCards"></div>
+    </section>
+
+    <section id="profile" class="screen">
+      <article class="profile-hero glass">
+        <div class="big-avatar">MJ</div>
+        <h2>민준 Physique Project</h2>
+        <p>182cm · 현재 목표: 81kg → 73kg / 체지방 23% → 12~13%</p>
+      </article>
+
+      <section class="score-grid">
+        <article class="score glass"><span>Shoulder</span><b>84</b><i style="width:84%"></i></article>
+        <article class="score glass"><span>Back</span><b>76</b><i style="width:76%"></i></article>
+        <article class="score glass"><span>Arms</span><b>68</b><i style="width:68%"></i></article>
+        <article class="score glass"><span>Leanness</span><b>45</b><i style="width:45%"></i></article>
+      </section>
+
+      <article class="glass">
+        <h3>v2에 들어간 것</h3>
+        <p class="soft">
+          프리미엄 UI, 요일별 루틴, 체크 저장, 운동 기록, 자동 증량 추천, 체중 미니 그래프,
+          물/단백질/수면/보충제 체크, 휴식 타이머, 오프라인 캐시 기본 구조.
+        </p>
+      </article>
+    </section>
+
+    <div class="timer-pill" id="timerPill">
+      <span id="timerDisplay">00:00</span>
+      <button id="timerStop">Stop</button>
+    </div>
+
+    <nav class="tabbar">
+      <button class="tab active" data-tab="home"><span>⌂</span>Home</button>
+      <button class="tab" data-tab="workout"><span>◆</span>Workout</button>
+      <button class="tab" data-tab="log"><span>↗</span>Log</button>
+      <button class="tab" data-tab="profile"><span>◉</span>Profile</button>
+    </nav>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
