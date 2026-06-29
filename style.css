@@ -40,3 +40,10 @@ button:active{transform:scale(.98)}
 .photo-card p{color:var(--soft);font-size:12px;line-height:1.45;white-space:pre-wrap}
 .aria-report p{color:var(--soft);line-height:1.65;margin-top:10px;white-space:pre-wrap}
 @media(max-width:390px){.tabs{grid-template-columns:repeat(4,1fr)}.photo-grid{grid-template-columns:1fr}}
+
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%) translateY(-80px);opacity:0;z-index:200;background:linear-gradient(135deg,rgba(192,38,69,.95),rgba(124,58,237,.95));color:white;border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 60px rgba(0,0,0,.45);border-radius:999px;padding:12px 18px;font-weight:900;transition:.28s}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.workout-summary{padding:15px;margin-top:13px;color:var(--soft);font-weight:800;line-height:1.5}
+.pulse{animation:pulseCard .65s ease}
+@keyframes pulseCard{0%{box-shadow:0 0 0 rgba(168,85,247,0)}45%{box-shadow:0 0 38px rgba(168,85,247,.5)}100%{box-shadow:0 0 0 rgba(168,85,247,0)}}
+.log-status{margin-top:10px;color:#d8b4fe;font-size:13px;font-weight:900}

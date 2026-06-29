@@ -1,7 +1,7 @@
 {
-  "name": "ASCEND V6",
+  "name": "ASCEND V6.1",
   "short_name": "ASCEND",
-  "description": "Project NOCTIS V6 - ARIA, Body Journal, Nutrition, Progress",
+  "description": "Project NOCTIS V6.1 - visible save feedback",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

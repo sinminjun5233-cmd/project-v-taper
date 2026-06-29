@@ -15,7 +15,7 @@
 
 <main class="app">
 <header class="head">
-  <div><p class="tag">PROJECT NOCTIS · V6</p><h1 id="hello">민준, 오늘도 올라가자</h1></div>
+  <div><p class="tag">PROJECT NOCTIS · V6.1</p><h1 id="hello">민준, 오늘도 올라가자</h1></div>
   <button class="logo">▲</button>
 </header>
 
@@ -66,7 +66,7 @@
 
 <section id="workout" class="page">
   <div class="sticky row"><div><p class="tag">WORKOUT 2.0</p><h2>Workout</h2></div><select id="day"></select></div>
-  <div id="workoutList" class="list"></div>
+  <div id="workoutList" class="list"></div><article class="card workout-summary" id="workoutSummary">운동 체크를 하면 여기에 진행 상황이 표시돼.</article>
 </section>
 
 <section id="log" class="page">
@@ -130,6 +130,7 @@
   </article>
 </section>
 
+<div class="toast" id="toast">Saved</div>
 <div class="timer" id="timer"><b id="timerText">00:00</b><button id="stop">정지</button></div>
 
 <nav class="tabs">
