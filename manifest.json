@@ -1,7 +1,7 @@
 {
-  "name": "Project V-Taper",
-  "short_name": "V-Taper",
-  "description": "민준 전용 프리미엄 운동 루틴, 기록, 증량 추천 앱",
+  "name": "ASCEND V-Taper",
+  "short_name": "ASCEND",
+  "description": "민준 전용 프리미엄 운동 루틴 앱",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
