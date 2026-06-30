@@ -1,7 +1,7 @@
 {
-  "name": "ASCEND V6.2",
+  "name": "ASCEND V7",
   "short_name": "ASCEND",
-  "description": "Project NOCTIS V6.2 - score, xp, aria, photo feedback fixed",
+  "description": "ASCEND V7 Clean Build",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

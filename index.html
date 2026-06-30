@@ -4,144 +4,132 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#09050b">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>ASCEND V6.2</title>
+<title>ASCEND V7</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="splash"><div class="mark">▲</div><h1>ASCEND</h1><p>Become Better Every Day</p></div>
-<div class="grain"></div><div class="blood"></div><div class="violet"></div>
+<div class="bg"></div>
+<div id="toast"></div>
 
 <main class="app">
-<header class="head">
-  <div><p class="tag">PROJECT NOCTIS · V6.2</p><h1 id="hello">민준, 오늘도 올라가자</h1></div>
-  <button class="logo">▲</button>
-</header>
-
-<section id="home" class="page on">
-  <article class="aria card">
-    <div class="aria-head"><span>ARIA</span><b>AI Coach Beta</b></div>
-    <p id="ariaText">오늘 기록을 입력하면 ARIA가 운동 강도와 회복 상태를 분석해줄게.</p>
-  </article>
-
-  <article class="today-memory card"><h3>Today Memory</h3><p><b>Food</b><span id="homeFood">저장된 식단 없음</span></p><p><b>Journal</b><span id="homeNote">저장된 저널 없음</span></p></article>
-
-  <article class="hero card">
+  <header class="top">
     <div>
-      <p class="tag">TODAY SCORE</p>
-      <h2><span id="score">0</span><small>/100</small></h2>
-      <p id="scoreMsg">오늘 미션을 채우면 점수가 올라가.</p>
-      <div class="actions"><button class="primary" data-go="workout">Start</button><button class="secondary" data-go="log">Log</button></div>
+      <p class="tag">ASCEND V7 · CLEAN BUILD</p>
+      <h1>민준, 오늘도 올라가자</h1>
     </div>
-    <div class="ring"><svg viewBox="0 0 150 150"><circle class="rbg" cx="75" cy="75" r="62"/><circle id="ring" class="rfg" cx="75" cy="75" r="62"/></svg><b id="pct">0%</b></div>
-  </article>
+    <div class="brand">▲</div>
+  </header>
 
-  <section class="quick">
-    <article class="mini card"><span>Streak</span><b id="streak">0🔥</b><small>daily save</small></article>
-    <article class="mini card"><span>Level</span><b id="level">1</b><small id="xpText">0/100 XP</small></article>
+  <section id="home" class="page active">
+    <article class="card aria">
+      <p class="tag">ARIA</p>
+      <h2>AI Coach Beta</h2>
+      <p id="ariaHome">기록을 입력하면 분석이 표시돼.</p>
+      <button id="refreshAria" class="btn">ARIA 새로고침</button>
+    </article>
+
+    <article class="hero card">
+      <div>
+        <p class="tag">TODAY SCORE</p>
+        <h2><span id="score">0</span><small>/100</small></h2>
+        <p id="scoreText">오늘 미션을 채워줘.</p>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 150 150"><circle class="bgc" cx="75" cy="75" r="62"/><circle id="ring" class="fgc" cx="75" cy="75" r="62"/></svg>
+        <b id="workPct">0%</b>
+      </div>
+    </article>
+
+    <section class="grid2">
+      <article class="card stat"><span>Level</span><b id="level">1</b><small id="xp">0/100 XP</small></article>
+      <article class="card stat"><span>Streak</span><b id="streak">0🔥</b><small>Save Day 기준</small></article>
+    </section>
+
+    <article class="card goal">
+      <div class="row"><div><p class="tag">CUTTING</p><h3>81kg → 73kg</h3></div><b id="goalPct">0%</b></div>
+      <div class="bar"><i id="goalBar"></i></div>
+      <p id="goalText">체중을 입력해줘.</p>
+    </article>
+
+    <section class="grid2">
+      <label class="card inputCard"><span>Weight</span><div><input id="weight" type="number" step=".1" placeholder="80.9"><b>kg</b></div></label>
+      <label class="card inputCard"><span>Sleep</span><div><input id="sleep" type="number" step=".5" placeholder="0"><b>h</b></div></label>
+      <label class="card inputCard"><span>Protein</span><div><input id="protein" type="number" step="5" placeholder="0"><b>/150g</b></div><em><i id="proteinBar"></i></em></label>
+      <label class="card inputCard"><span>Water</span><div><input id="water" type="number" step="100" placeholder="0"><b>/3000mL</b></div><em><i id="waterBar"></i></em></label>
+    </section>
+
+    <article class="card checks">
+      <div class="row"><h3>Daily System</h3><button id="saveDay" class="miniBtn">Save Day</button></div>
+      <label><input type="checkbox" id="chkCreatine"> 크레아틴</label>
+      <label><input type="checkbox" id="chkProtein"> 프로틴</label>
+      <label><input type="checkbox" id="chkSkin"> 운동 후 세안/샤워</label>
+      <label><input type="checkbox" id="chkSteps"> 8,000보</label>
+    </article>
   </section>
 
-  <article class="goal card">
-    <div class="row"><div><p class="tag">CUTTING GOAL</p><h3>81kg → 73kg</h3></div><strong id="goalPct">0%</strong></div>
-    <div class="line"><i id="goalLine"></i></div><p id="goalMsg">아침 공복 체중을 입력해줘.</p>
-  </article>
-
-  <section class="metrics">
-    <label class="metric card"><span>Weight</span><div><input id="weight" type="number" step=".1" placeholder="80.9"><b>kg</b></div></label>
-    <label class="metric card"><span>Protein</span><div><input id="protein" type="number" step="5" placeholder="0"><b>/150g</b></div><em><i id="proteinBar"></i></em></label>
-    <label class="metric card"><span>Water</span><div><input id="water" type="number" step="100" placeholder="0"><b>/3000mL</b></div><em><i id="waterBar"></i></em></label>
-    <label class="metric card"><span>Sleep</span><div><input id="sleep" type="number" step=".5" placeholder="0"><b>h</b></div></label>
+  <section id="workout" class="page">
+    <div class="sticky row"><div><p class="tag">WORKOUT</p><h2>Routine</h2></div><select id="daySelect"></select></div>
+    <article class="card summary" id="workSummary">운동 체크를 하면 진행률이 표시돼.</article>
+    <div id="workoutList"></div>
   </section>
 
-  <article class="card checklist">
-    <div class="row"><h3>Daily System</h3><button class="tiny" id="saveDay">Save Day</button></div>
-    <label><input id="cWorkout" type="checkbox"> 운동 완료</label>
-    <label><input id="cCreatine" type="checkbox"> 크레아틴 3~5g</label>
-    <label><input id="cProtein" type="checkbox"> 프로틴 1스쿱</label>
-    <label><input id="cSkin" type="checkbox"> 운동 후 세안/샤워</label>
-    <label><input id="cSteps" type="checkbox"> 8,000보 이상</label>
-  </article>
-</section>
+  <section id="log" class="page">
+    <div class="sticky"><p class="tag">LOG</p><h2>Training Log</h2></div>
+    <article class="card info">기록 저장 시 XP +8. 3세트 12회 이상이면 다음 운동 +2.5kg 추천.</article>
+    <div id="logList"></div>
+  </section>
 
-<section id="workout" class="page">
-  <div class="sticky row"><div><p class="tag">WORKOUT 2.0</p><h2>Workout</h2></div><select id="day"></select></div>
-  <div id="workoutList" class="list"></div><article class="card workout-summary" id="workoutSummary">운동 체크를 하면 여기에 진행 상황이 표시돼.</article>
-</section>
+  <section id="nutrition" class="page">
+    <div class="sticky"><p class="tag">NUTRITION</p><h2>Nutrition</h2></div>
+    <article class="card">
+      <h3>Food Memo</h3>
+      <textarea id="foodMemo" placeholder="오늘 먹은 음식"></textarea>
+      <button id="saveFood" class="btn">Save Nutrition</button>
+      <p class="status" id="foodStatus">저장 대기 중</p>
+      <div class="preview" id="foodPreview">저장된 식단 없음</div>
+    </article>
+  </section>
 
-<section id="log" class="page">
-  <div class="sticky"><p class="tag">OVERLOAD</p><h2>Training Log</h2></div>
-  <article class="card info"><b>ARIA Rule</b><p>3세트 모두 12회 이상이면 +2.5kg, 8회 미만이면 감량 추천. 수면이 부족하면 실패 직전까지 가지 마.</p></article>
-  <div id="logList"></div>
-</section>
+  <section id="body" class="page">
+    <div class="sticky"><p class="tag">BODY JOURNAL</p><h2>Body</h2></div>
+    <article class="card">
+      <h3>Progress Photo</h3>
+      <input id="photoInput" type="file" accept="image/*">
+      <textarea id="photoMemo" placeholder="사진 메모"></textarea>
+      <button id="savePhoto" class="btn">Save Photo</button>
+      <p class="status" id="photoStatus">사진 저장 대기 중</p>
+    </article>
+    <article class="card">
+      <h3>Photo Timeline</h3>
+      <p class="status" id="photoCount">0개</p>
+      <div id="photoTimeline" class="photos"></div>
+    </article>
+    <article class="card">
+      <h3>Journal</h3>
+      <textarea id="journalMemo" placeholder="오늘 몸 상태/운동 느낌"></textarea>
+      <button id="saveJournal" class="btn">Save Journal</button>
+      <p class="status" id="journalStatus">저장 대기 중</p>
+      <div class="preview" id="journalPreview">저장된 저널 없음</div>
+    </article>
+  </section>
 
-<section id="progress" class="page">
-  <div class="sticky"><p class="tag">PROGRESS+</p><h2>Progress</h2></div>
-  <article class="card"><div class="row"><h3>Weight Trend</h3><button class="tiny" id="clearWeight">Clear</button></div><div id="chart" class="chart"></div></article>
-  <article class="card"><h3>Calendar</h3><div id="calendar" class="calendar"></div></article>
-  <article class="card"><h3>ASCEND Focus</h3><div class="focus"><span>Shoulder</span><i style="width:86%"></i><span>Back</span><i style="width:78%"></i><span>Arms</span><i style="width:70%"></i><span>Leanness</span><i style="width:46%"></i></div></article>
-</section>
+  <section id="progress" class="page">
+    <div class="sticky"><p class="tag">PROGRESS</p><h2>Progress</h2></div>
+    <article class="card"><h3>Weight Trend</h3><div id="weightChart" class="chart"></div></article>
+    <article class="card"><h3>Calendar</h3><div id="calendar" class="calendar"></div></article>
+  </section>
 
-<section id="nutrition" class="page">
-  <div class="sticky"><p class="tag">NUTRITION</p><h2>Nutrition</h2></div>
-  <article class="card meal">
-    <h3>Food Memo</h3>
-    <textarea id="foodMemo" placeholder="오늘 먹은 음식 메모"></textarea>
-    <button class="primary wide" id="saveFood" type="button">Save Nutrition</button><p class="saved" id="foodSaved">저장 대기 중</p><div class="saved-card" id="foodPreview">아직 저장된 식단 메모가 없어.</div>
-  </article>
-  <article class="card info"><b>피부 고려 프로틴</b><p>여드름이 잘 나면 WPI나 식물성 단백질 우선. WPC, 매스게이너, 당 많은 제품은 피하기.</p></article>
-</section>
+  <div id="timer" class="timer"><b id="timerText">00:00</b><button id="stopTimer">정지</button></div>
 
-<section id="journal" class="page">
-  <div class="sticky"><p class="tag">BODY LAB · V6</p><h2>Body Journal</h2></div>
-
-  <article class="card body-lab">
-    <h3>Progress Photo</h3>
-    <p class="soft">정면/측면/후면 사진을 저장해서 변화 추적용으로 쓸 수 있어. 사진은 네 폰 브라우저 저장공간에만 저장돼.</p>
-    <input id="photoInput" class="file" type="file" accept="image/*">
-    <textarea id="photoMemo" placeholder="사진 메모: 체중, 컨디션, 오늘 느낌"></textarea>
-    <button class="primary wide" id="savePhoto" type="button">Save Photo</button>
-    <p class="saved" id="photoSaved">사진 저장 대기 중</p>
-  </article>
-
-  <article class="card">
-    <div class="row"><h3>Photo Timeline</h3><button class="tiny" id="clearPhotos" type="button">Clear</button></div>
-    <p class="saved" id="photoCount">저장된 사진 0개</p><div id="photoTimeline" class="photo-grid"></div>
-  </article>
-
-  <article class="card meal">
-    <h3>Body Note</h3>
-    <textarea id="bodyNote" placeholder="오늘 몸 상태, 얼굴 붓기, 운동 느낌 메모"></textarea>
-    <button class="primary wide" id="saveNote" type="button">Save Journal</button><p class="saved" id="noteSaved">저장 대기 중</p><div class="saved-card" id="notePreview">아직 저장된 저널이 없어.</div>
-  </article>
-</section>
-
-
-<section id="aria" class="page">
-  <div class="sticky"><p class="tag">ARIA V6</p><h2>AI Coach</h2></div>
-  <article class="card aria-report">
-    <h3>오늘의 분석</h3>
-    <p id="ariaReport">기록을 입력하면 ARIA가 분석을 보여줘.</p>
-    <button class="primary wide" id="refreshAria" type="button">Refresh ARIA</button><p class="saved" id="ariaSaved">새로고침 대기 중</p>
-  </article>
-  <article class="card info">
-    <b>현재 AI 방식</b>
-    <p>V6은 비용 없는 규칙 기반 AI 코치야. 수면, 물, 단백질, 운동 완료율, 기록을 바탕으로 피드백을 생성해. 나중에 GPT API를 연결할 수 있는 구조로 확장할 예정.</p>
-  </article>
-</section>
-
-<div class="toast" id="toast">Saved</div>
-<div class="timer" id="timer"><b id="timerText">00:00</b><button id="stop">정지</button></div>
-
-<nav class="tabs">
-  <button class="tab on" data-tab="home">⌂<span>Home</span></button>
-  <button class="tab" data-tab="workout">◆<span>Workout</span></button>
-  <button class="tab" data-tab="log">↗<span>Log</span></button>
-  <button class="tab" data-tab="progress">▥<span>Progress</span></button>
-  <button class="tab" data-tab="nutrition">◍<span>Food</span></button>
-  <button class="tab" data-tab="journal">▣<span>Body</span></button>
-  <button class="tab" data-tab="aria">✦<span>ARIA</span></button>
-</nav>
+  <nav class="tabs">
+    <button class="tab active" data-tab="home">⌂<span>Home</span></button>
+    <button class="tab" data-tab="workout">◆<span>Workout</span></button>
+    <button class="tab" data-tab="log">↗<span>Log</span></button>
+    <button class="tab" data-tab="nutrition">◍<span>Food</span></button>
+    <button class="tab" data-tab="body">▣<span>Body</span></button>
+    <button class="tab" data-tab="progress">▥<span>Progress</span></button>
+  </nav>
 </main>
 <script src="app.js"></script>
 </body>
