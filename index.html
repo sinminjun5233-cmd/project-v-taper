@@ -1,94 +1,14 @@
 <!doctype html>
 <html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#09050b">
-<title>ASCEND ORIGIN V9</title>
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="bg"></div>
-<div id="toast"></div>
-<div id="transition"><img src="logo.png"><h2 id="transitionTitle">READY</h2><p id="transitionSub">Next Exercise</p></div>
-
-<main class="app">
-<header class="top">
-  <div><p class="tag">ASCEND ORIGIN · V9</p><h1 id="greet">오늘도 올라가자</h1></div>
-  <img class="logo" src="logo.png" alt="ASCEND">
-</header>
-
-<section id="home" class="page active">
-  <article class="card hero">
-    <div><p class="tag">TODAY SCORE</p><h2><span id="score">0</span><small>/100</small></h2><p id="scoreText">오늘 미션을 시작해줘.</p></div>
-    <div class="ring"><svg viewBox="0 0 150 150"><circle class="bgc" cx="75" cy="75" r="62"/><circle id="ring" class="fgc" cx="75" cy="75" r="62"/></svg><b id="workPct">0%</b></div>
-  </article>
-  <article class="card live"><p class="tag">LIVE WORKOUT</p><h2 id="homeExercise">운동을 시작해줘</h2><p id="homeSet">Workout 탭에서 Start Session</p><button class="btn" data-tabgo="workout">운동 시작</button></article>
-  <section class="grid2"><article class="card stat"><span>Level</span><b id="level">1</b><small id="xpText">0/100 XP</small></article><article class="card stat"><span>Streak</span><b id="streak">0🔥</b><small>Save Day 기준</small></article></section>
-  <article class="card goal"><div class="row"><div><p class="tag">GOAL</p><h3><span id="currentWeightLabel">0</span>kg → <span id="goalWeightLabel">73</span>kg</h3></div><b id="goalPct">0%</b></div><div class="bar"><i id="goalBar"></i></div><p id="goalText">Profile에서 체중 목표를 설정해줘.</p></article>
-  <section class="grid2">
-    <label class="card inputCard"><span>Today Weight</span><div><input id="todayWeight" type="number" step=".1" placeholder="80.9"><b>kg</b></div><button id="saveWeight" class="miniBtn">체중 저장</button></label>
-    <label class="card inputCard"><span>Sleep</span><div><input id="sleep" type="number" step=".5" placeholder="0"><b>h</b></div></label>
-    <label class="card inputCard"><span>Protein</span><div><input id="protein" type="number" step="5" placeholder="0"><b>/150g</b></div><em><i id="proteinBar"></i></em></label>
-    <label class="card inputCard"><span>Water</span><div><input id="water" type="number" step="100" placeholder="0"><b>/3000mL</b></div><em><i id="waterBar"></i></em></label>
-  </section>
-  <article class="card checks"><div class="row"><h3>Daily System</h3><button id="saveDay" class="miniBtn">Save Day</button></div><label><input type="checkbox" id="chkCreatine"> 크레아틴</label><label><input type="checkbox" id="chkProtein"> 프로틴</label><label><input type="checkbox" id="chkSkin"> 운동 후 세안/샤워</label><label><input type="checkbox" id="chkSteps"> 8,000보</label></article>
-</section>
-
-<section id="workout" class="page">
-  <div class="sticky row"><div><p class="tag">LIVE SESSION</p><h2>Workout</h2></div><select id="daySelect"></select></div>
-  <article class="card session">
-    <div class="row"><div><p class="tag" id="sessionState">READY</p><h2 id="liveExercise">Start Session</h2></div><b id="liveIndex">0/0</b></div>
-    <div class="sessionProgress"><i id="sessionProgress"></i></div>
-    <p id="liveDetail">Start Session을 누르면 현재 운동 중심으로 진행돼.</p>
-    <p id="nextName">다음 운동: -</p>
-    <div id="setDots" class="setDots"></div>
-    <div id="timerBig" class="timerBig">00:00</div>
-    <div class="sessionActions"><button id="startSession" class="btn">Start Session</button><button id="completeSet" class="btn">Set 완료</button><button id="nextExercise" class="ghostBtn">다음 운동</button></div>
-  </article>
-  <article class="card summary" id="workSummary">운동 진행률 표시</article>
-  <div id="workoutList"></div>
-</section>
-
-<section id="log" class="page">
-  <div class="sticky"><p class="tag">LOG</p><h2>Training Log</h2></div>
-  <article class="card info">운동 기록 저장 시 XP +8. 3세트 모두 12회 이상이면 다음 운동 +2.5kg 추천.</article>
-  <div id="logList"></div>
-</section>
-
-<section id="food" class="page">
-  <div class="sticky"><p class="tag">NUTRITION</p><h2>Food</h2></div>
-  <article class="card"><h3>Food Memo</h3><textarea id="foodMemo" placeholder="오늘 먹은 음식, 단백질, 간식"></textarea><button id="saveFood" class="btn">Save Food</button><p id="foodStatus" class="status">저장 대기 중</p><div id="foodPreview" class="preview">저장된 식단 없음</div></article>
-</section>
-
-<section id="body" class="page">
-  <div class="sticky"><p class="tag">BODY JOURNAL</p><h2>Body</h2></div>
-  <article class="card"><h3>Progress Photo</h3><input id="photoInput" type="file" accept="image/*"><textarea id="photoMemo" placeholder="사진 메모: 체중, 컨디션, 운동 후 느낌"></textarea><button id="savePhoto" class="btn">Save Photo</button><p id="photoStatus" class="status">사진 저장 대기 중</p></article>
-  <article class="card"><div class="row"><h3>Photo Timeline</h3><button id="clearPhotos" class="miniBtn">Clear</button></div><p id="photoCount" class="status">0개</p><div id="photoTimeline" class="photos"></div></article>
-</section>
-
-<section id="progress" class="page">
-  <div class="sticky"><p class="tag">PROGRESS</p><h2>Progress</h2></div>
-  <article class="card"><div class="row"><h3>Weight Trend</h3><button id="clearWeights" class="miniBtn">Clear</button></div><div id="weightChart" class="chart"></div></article>
-  <article class="card"><div class="row"><h3>Calendar</h3><button id="markToday" class="miniBtn">오늘 체크</button></div><div id="calendar" class="calendar"></div></article>
-</section>
-
-<section id="profile" class="page">
-  <div class="sticky"><p class="tag">SETUP</p><h2>Profile</h2></div>
-  <article class="card setup"><h3>기본 정보</h3><div class="grid2"><label><span>이름</span><input id="name" placeholder="민준"></label><label><span>출생년도</span><input id="birthYear" type="number" placeholder="2010"></label><label><span>키</span><input id="height" type="number" placeholder="182"></label><label><span>현재 체중</span><input id="currentWeight" type="number" step=".1" placeholder="80.9"></label><label><span>목표 체중</span><input id="goalWeight" type="number" step=".1" placeholder="73"></label><label><span>체지방률</span><input id="bodyFat" type="number" step=".1" placeholder="23"></label></div><h3>목표</h3><select id="goalType"><option value="cut">커팅 / 다이어트</option><option value="recomp">리컴프</option><option value="bulk">벌크업</option><option value="fitness">체력 향상</option></select><h3>주 운동 횟수</h3><select id="daysPerWeek"><option value="3">주 3회</option><option value="4">주 4회</option><option value="5">주 5회</option><option value="6">주 6회</option></select><button id="saveProfile" class="btn">Profile 저장</button></article>
-</section>
-
-<section id="aria" class="page">
-  <div class="sticky"><p class="tag">ARIA CHAT</p><h2>AI Coach</h2></div>
-  <article class="card ariaBox"><h3>ARIA Report</h3><p id="ariaReport">기록을 입력하면 분석이 표시돼.</p><button id="refreshAria" class="btn">Refresh ARIA</button></article>
-  <article class="card chat"><h3>Ask ARIA</h3><div id="chatLog" class="chatLog"></div><div class="chatInput"><input id="chatText" placeholder="예: 랫풀다운 자세, 커팅 식단, 수면 부족"><button id="sendChat">전송</button></div></article>
-</section>
-
-<nav class="tabs">
-  <button class="tab active" data-tab="home">⌂<span>Home</span></button><button class="tab" data-tab="workout">◆<span>Workout</span></button><button class="tab" data-tab="log">↗<span>Log</span></button><button class="tab" data-tab="food">◍<span>Food</span></button><button class="tab" data-tab="body">▣<span>Body</span></button><button class="tab" data-tab="progress">▥<span>Progress</span></button><button class="tab" data-tab="profile">◉<span>Profile</span></button><button class="tab" data-tab="aria">✦<span>ARIA</span></button>
-</nav>
-</main>
-<script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#09050b" />
+    <title>ASCEND 2.0</title>
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
