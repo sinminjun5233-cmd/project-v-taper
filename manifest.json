@@ -1,7 +1,7 @@
 {
   "name": "ASCEND ORIGIN",
   "short_name": "ASCEND",
-  "description": "ASCEND ORIGIN V8.1 - food restored and session fixed",
+  "description": "ASCEND V9 - live workout timer, photo, ARIA chat",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
