@@ -1,7 +1,7 @@
 {
-  "name": "ASCEND V7",
+  "name": "ASCEND ORIGIN",
   "short_name": "ASCEND",
-  "description": "ASCEND V7 Clean Build",
+  "description": "ASCEND ORIGIN V8 - live workout, setup, progress",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
