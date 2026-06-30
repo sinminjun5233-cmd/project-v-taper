@@ -1,7 +1,7 @@
 {
   "name": "ASCEND ORIGIN",
   "short_name": "ASCEND",
-  "description": "ASCEND ORIGIN V8 - live workout, setup, progress",
+  "description": "ASCEND ORIGIN V8.1 - food restored and session fixed",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
